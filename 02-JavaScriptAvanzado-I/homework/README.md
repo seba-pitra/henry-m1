@@ -6,6 +6,8 @@
 Determiná que será impreso en la consola, sin ejecutar el código.
 
 > Investiga cuál es la diferencia entre declarar una variable con `var` y directamente asignarle un valor.
+//Las variables declaran solo s limitan al contexto de ejecucion en el que son declaradas. Las variables
+//no declaradas siempre son globales
 
 ```javascript
 x = 1;
@@ -36,6 +38,7 @@ foo();
 function foo() { console.log('Hola!'); }
 var bar = 1;
 baz = 2;
+
 ```
 
 ```javascript
@@ -65,7 +68,7 @@ if (true) {
     var instructor = "The Flash";
     let pm = "Reverse Flash";
     console.log(instructor);
-    console.log(pm);
+    console.log(pm);/
 }
 console.log(instructor);
 console.log(pm);
@@ -89,7 +92,7 @@ parseInt("09")
 5 || 0
 0 || 5
 [3]+[3]-[10]
-3>2>1
+3 > 2 > 1
 [] == ![]
 ```
 
@@ -127,7 +130,7 @@ function getFood(food) {
     return snack;
 }
 
-getFood(false);
+getFood(false);//meow mix
 ```
 
 
@@ -159,6 +162,9 @@ console.log(test());
 Considerando el siguiente código, ¿Cuál sería el orden en el que se muestra por consola? ¿Por qué?
 
 ```javascript
+
+//orden:
+// 1 - 4 - 3 - 2
 function printing() {
    console.log(1);
    setTimeout(function() { console.log(2); }, 1000);
@@ -167,4 +173,5 @@ function printing() {
 }
 
 printing();
+
 ```
