@@ -20,11 +20,10 @@ function counter() {
   otroContador()      // 2
   otroContador()      // 3
    */
-  let count = 0;
-  return function() {
-    count++;
-    return count
-  }
+   let count = 1;
+   return function() {
+      return count++
+   }
 }
 
 function cacheFunction(cb) {
@@ -45,7 +44,6 @@ function cacheFunction(cb) {
   la próxima vez que reciba el mismo argumento, no sea necesario volver a invocar a cb, 
   porque el resultado estará guardado en la "memoria caché".
 
-
   Ejemplo:
   function square(n){
     return n * n
@@ -56,10 +54,29 @@ function cacheFunction(cb) {
   squareCache(5)    // invocará a square(5), almacenará el resultado y lo retornará
   squareCache(5)    // no volverá a invocar a square, simplemente buscará en la 
                        caché cuál es el resultado de square(5) y lo retornará 
-                       (tip: si usaste un objeto, podés usar hasOwnProperty) 
+                       (tip: si usaste un objeto, podés usar hasOwnProperty)
+   */
 
-  */
+
+   let cache = {};
+
+   return function(arg) {
+      if (cache.hasOwnProperty(arg)) {
+         return cache[arg]
+      } else {
+         cache[arg] = cb(arg)
+         return cache[arg]
+      }
+   }
 }
+
+function square(n){
+   return n * 2
+ }
+
+ const squareCache = cacheFunction(square)
+
+ console.log(squareCache(3));
 
 // Bind
 
@@ -67,6 +84,7 @@ var instructor = {
   nombre: "Franco",
   edad: 25,
 };
+
 
 var alumno = {
   nombre: "Juan",
@@ -100,7 +118,7 @@ let getNombreAlumno = getNombre.bind(alumno)
 */
 
 function crearCadena(delimitadorIzquierda, delimitadorDerecha, cadena) {
-  return delimitadorIzquierda + cadena + delimitadorDerecha;
+   return delimitadorIzquierda + cadena + delimitadorDerecha;
 }
 
 let textoAsteriscos = crearCadena.bind(this, "*", "*")
