@@ -26,7 +26,7 @@ console.log(nFactorial(5))
 function nFibonacci(n) {
    //Formula de fibonacci: fibonacci(n) = fibonacci(n-1) + fibonacci(n-2)
    //caso base: Cuando llegue a 0 o a 1;
-   if (n == 0) return 0
+   if (n <= 0) return 0
    else if(n == 1) return 1
    else return nFibonacci(n-1) + nFibonacci(n-2)
 }
