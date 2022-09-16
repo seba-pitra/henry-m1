@@ -36,7 +36,7 @@ LinkedList.prototype.add = function(value) {
    current.next = newNode
 }
 
-// - remove: elimina el último nodo de la lista y retorna su valor (tener en cuenta el caso particular de una lista de un solo nodo y de una lista vacía);
+
 LinkedList.prototype.remove = function() {
    let current = this.head;
    
@@ -63,16 +63,32 @@ LinkedList.prototype.remove = function() {
    }
 }
 
-LinkedList.prototype.search = function() {
-   
-}
+LinkedList.prototype.search = function(param) {
+   let current = this.head
+   if(this.head == null) return null
 
-const miLista = new LinkedList(10)
-miLista.add(5)
-miLista.add(10)
-miLista.add(7)
-console.log(miLista.remove())
-console.log(miLista);
+   if (typeof param == 'function') {
+      if(param(this.head.value)) return this.head.value
+      else {
+         while (current.next) {
+            current = current.next
+            if(param(current.value)) return current.value
+            else if(current.next == null) return null
+         }
+      }
+   } else {
+      if (current.value == param) {
+         return current.value
+      } 
+      else {
+         while (current.next) {
+            current = current.next
+            if(current.value === param) return current.value;
+            else if(current.next == null) return null
+         }
+      }
+   }
+}
 
 /*
 Implementar la clase HashTable.
