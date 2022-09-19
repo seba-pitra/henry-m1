@@ -17,7 +17,6 @@ function BinarySearchTree(value) {
   this.right = null;
 }
 
-// - insert: agrega un nodo en el lugar correspondiente
 BinarySearchTree.prototype.insert = function(value) {
    if (value < this.value) {
       if (this.left) {
@@ -33,10 +32,8 @@ BinarySearchTree.prototype.insert = function(value) {
          this.right = new BinarySearchTree(value)
       }
    }
-   return false
 }
 
-// - size: retorna la cantidad total de nodos del árbol
 BinarySearchTree.prototype.size = function() {
    let acc = 1;
    if (this.left) {
@@ -48,11 +45,48 @@ BinarySearchTree.prototype.size = function() {
    return acc
 }
 
-BinarySearchTree.prototype.contains = function() {}
+BinarySearchTree.prototype.contains = function(value) {
+   if (value === this.value) return true
+   
+   if (value < this.value) {
+      if (this.left) return this.left.contains(value)
+   }
+   if (value > this.value) {
+      if(this.right) return this.right.contains(value)
+   }
+   return false
+}
 
-BinarySearchTree.prototype.depthFirstForEach = function() {}
+BinarySearchTree.prototype.depthFirstForEach = function(cb, order) {
+   if (order == undefined || order == "in-order") {
+      if (this.left) this.left.depthFirstForEach(cb, order)
+      cb(this.value)
+      if (this.right) this.right.depthFirstForEach(cb, order)
+   }
+   else if (order == "post-order") {
+      if (this.left) this.left.depthFirstForEach(cb, order)
+      if (this.right) this.right.depthFirstForEach(cb, order)
+      cb(this.value)
+   }
+   else if (order == "pre-order") {
+      cb(this.value)
+      if (this.left) this.left.depthFirstForEach(cb, order)
+      if (this.right) this.right.depthFirstForEach(cb, order)
+   }
+}
 
-BinarySearchTree.prototype.breadthFirstForEach = function() {}
+BinarySearchTree.prototype.breadthFirstForEach = function(cb, pend) {
+   if(!pend) pend = [];
+   
+   cb(this.value)
+
+   if (this.left) pend.push(this.left)
+   if (this.right) pend.push(this.right)
+
+   if (pend.length > 0) {
+      pend.shift().breadthFirstForEach(cb,pend)
+   }
+}
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
