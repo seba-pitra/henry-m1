@@ -117,7 +117,6 @@ HashTable.prototype.hash = function(input) {
    return acc % this.numBuckets;
 }
 
-// - set: recibe el conjunto clave valor (como dos parámetros distintos), hashea la clave invocando al método hash, y almacena todo el conjunto en el bucket correcto.
 HashTable.prototype.set = function(key, value) {
    const index = this.hash(key)
    if (!this.arr[index]) {
@@ -126,7 +125,6 @@ HashTable.prototype.set = function(key, value) {
    this.arr[index][key] = value
 }
 
-// - get: recibe una clave por parámetro, y busca el valor que le corresponde en el bucket correcto de la tabla.
 HashTable.prototype.get = function(key) {
    const index = this.hash(key)
    const bucket = this.arr[index];
@@ -135,11 +133,6 @@ HashTable.prototype.get = function(key) {
    }
    return null
 }
-
-// - hasKey: recibe una clave por parámetro y consulta si ya hay algo almacenado en la tabla con esa clave (retorna un booleano).
-
-// Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
-// */
 
 HashTable.prototype.hasKey = function(key) {
    if (this.get(key)) return true
