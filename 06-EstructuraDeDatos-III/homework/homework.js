@@ -18,6 +18,8 @@ function BinarySearchTree(value) {
 }
 
 BinarySearchTree.prototype.insert = function(value) {
+   if(!this.value) this.value = value
+
    if (value < this.value) {
       if (this.left) {
          this.left.insert(value)
