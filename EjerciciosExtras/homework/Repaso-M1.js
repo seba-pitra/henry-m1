@@ -16,9 +16,18 @@ const {
 
 var countArray = function(array) {
     // Tu código aca:
-    
+    let acc = 0;
+    for (let i = 0; i < array.length; i++) {
+        if(Array.isArray(array[i])) {
+            acc += countArray(array[i])
+        } else {
+            acc += array[i]
+        }
+    }
+    return acc
 }
 
+// console.log(countArray([1, [2, [3,4]], [5,6], 7]));
 
 // Implementar la función countProps: a partir de un objeto en el cual cada propiedad puede contener
 // cualquier tipo de dato, determinar la cantidad de propiedades de objetos en cualquier nivel, ya sea el inicial
@@ -39,8 +48,28 @@ var countArray = function(array) {
 
 var countProps = function(obj) {
     // Tu código aca:
+    let acc = 0;
 
+    for (const item in obj) {
+        if (typeof obj[item] === 'object' && !Array.isArray(obj[item])) {
+            acc += countProps(obj[item])
+        } 
+        acc++
+    }
+    return acc
 }
+
+// var obj = {
+//   a: {
+//     a1: 10,
+//     a2: 'Franco',
+//     a3: {f: 'r', a: 'n', c: {o: true}}
+//   },
+//   b: 2,
+//   c: [1, {a: 1}, 'Franco']
+// }
+
+// console.log(countProps(obj))
 
 
 // Implementar el método changeNotNumbers dentro del prototype de LinkedList que deberá cambiar
@@ -53,7 +82,7 @@ var countProps = function(obj) {
 
 LinkedList.prototype.changeNotNumbers = function(){
     // Tu código aca:
-
+    
 }
 
 
